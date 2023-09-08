@@ -2,15 +2,10 @@ const express = require("express");
 const path = require("path");
 const { post } = require("./admin");
 const router = express.Router();
+const postController = require("../controllers/post");
 
-router.get("/", (req, res) => {
-    // res.sendFile(path.join(__dirname, "..", "views", "homepage.html"));
-    res.render("home", { postArr: post });
-    console.log(post);
-});
+router.get("/", postController.renderHomePage);
 
-router.get("/post", (req, res) => {
-    res.sendFile(path.join(__dirname, "..", "views/postpage.html"));
-});
+router.get("/post/:postId", postController.postDetails);
 
 module.exports = router;
